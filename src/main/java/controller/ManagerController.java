@@ -1,2 +1,8 @@
-package controller;public class ManagerController {
+package controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class ManagerController {
+
 }

@@ -1,10 +1,10 @@
-package service;
+package repository;
 
 import model.Employee;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface EmployeeRepository {
     Employee getEmployeeById(int id);
     List<Employee> getAllEmployees();
     void createEmployee(Employee employee);

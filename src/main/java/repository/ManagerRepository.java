@@ -1,11 +1,11 @@
-package service;
+package repository;
 
 import model.Employee;
 import model.Manager;
 
 import java.util.List;
 
-public interface ManagerService {
+public interface ManagerRepository {
     Manager getManagerById(int id);
     List<Manager> getAllManager();
     List<Employee> getManagersEmployees(Manager manager);
