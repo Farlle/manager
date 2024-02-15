@@ -12,6 +12,17 @@ public class Manager {
     private String department;
     private List<Employee> employees;
 
+    public Manager(int id, String name, String department, List<Employee> employees) {
+        this.id = id;
+        this.name = name;
+        this.department = department;
+        this.employees = employees;
+    }
+
+    public Manager() {
+
+    }
+
     public int getId() {
         return id;
     }

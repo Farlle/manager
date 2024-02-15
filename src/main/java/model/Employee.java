@@ -1,6 +1,6 @@
 package model;
 
-import org.springframework.context.annotation.Configuration;
+import model.enums.PositionAtWork;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,6 +9,17 @@ public class Employee {
     private String name;
     private PositionAtWork positionAtWork;
     private int Salary;
+
+    public Employee(int id, String name, PositionAtWork positionAtWork, int salary) {
+        this.id = id;
+        this.name = name;
+        this.positionAtWork = positionAtWork;
+        Salary = salary;
+    }
+
+    public Employee() {
+
+    }
 
     public int getId() {
         return id;
