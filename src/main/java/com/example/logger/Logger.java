@@ -1,4 +1,4 @@
-package logger;
+package com.example.logger;
 import org.aspectj.lang.annotation.Aspect;
 
 

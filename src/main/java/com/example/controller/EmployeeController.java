@@ -1,18 +1,19 @@
-package controller;
+package com.example.controller;
 
-import model.Employee;
+import com.example.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import repository.EmployeeRepository;
+import com.example.repository.EmployeeRepository;
 
 @Controller
 @RequestMapping("/employee")
-public class EmployeeController {
+ public class EmployeeController {
 
     private final EmployeeRepository employeeRepository;
 
+    @Autowired
     public EmployeeController(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }

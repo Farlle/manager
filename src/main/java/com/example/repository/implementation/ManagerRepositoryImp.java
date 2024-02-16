@@ -1,9 +1,9 @@
-package repository.implementation;
+package com.example.repository.implementation;
 
-import model.Employee;
-import model.Manager;
+import com.example.model.Employee;
+import com.example.model.Manager;
+import com.example.repository.ManagerRepository;
 import org.springframework.stereotype.Repository;
-import repository.ManagerRepository;
 
 import java.util.ArrayList;
 import java.util.List;

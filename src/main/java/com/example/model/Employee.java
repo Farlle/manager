@@ -1,6 +1,6 @@
-package model;
+package com.example.model;
 
-import model.enums.PositionAtWork;
+import com.example.model.enums.PositionAtWork;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -8,13 +8,13 @@ public class Employee {
     private int id;
     private String name;
     private PositionAtWork positionAtWork;
-    private int Salary;
+    private int salary;
 
     public Employee(int id, String name, PositionAtWork positionAtWork, int salary) {
         this.id = id;
         this.name = name;
         this.positionAtWork = positionAtWork;
-        Salary = salary;
+        this.salary = salary;
     }
 
     public Employee() {
@@ -46,10 +46,10 @@ public class Employee {
     }
 
     public int getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void setSalary(int salary) {
-        Salary = salary;
+        this.salary = salary;
     }
 }

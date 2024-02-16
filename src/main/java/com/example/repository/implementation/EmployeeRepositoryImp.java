@@ -1,9 +1,9 @@
-package repository.implementation;
+package com.example.repository.implementation;
 
-import model.Employee;
-import model.enums.PositionAtWork;
+import com.example.model.Employee;
+import com.example.model.enums.PositionAtWork;
 import org.springframework.stereotype.Repository;
-import repository.EmployeeRepository;
+import com.example.repository.EmployeeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
     {
         employees.add(new Employee(id++,"Oleg", PositionAtWork.CLEANER, 20_000));
         employees.add(new Employee(id++,"Sashok", PositionAtWork.PROGRAMMER, 200_000));
-        employees.add(new Employee(id++,"Oleg", PositionAtWork.SUBMANAGER, 500_000));
+        employees.add(new Employee(id++,"Dimas", PositionAtWork.SUBMANAGER, 500_000));
     }
 
     @Override
