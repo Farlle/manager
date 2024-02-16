@@ -1,7 +1,6 @@
-package model;
+package com.example.model;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

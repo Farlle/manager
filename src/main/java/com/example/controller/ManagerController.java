@@ -1,12 +1,12 @@
-package controller;
+package com.example.controller;
 
-import model.Employee;
-import model.Manager;
+import com.example.model.Employee;
+import com.example.model.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import repository.ManagerRepository;
+import com.example.repository.ManagerRepository;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import java.util.List;
 @RequestMapping("/manager")
 public class ManagerController {
 
-    @Autowired
     private ManagerRepository managerRepository;
 
+    @Autowired
     public ManagerController(ManagerRepository managerRepository) {
         this.managerRepository = managerRepository;
     }
