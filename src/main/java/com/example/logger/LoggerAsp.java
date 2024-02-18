@@ -15,7 +15,7 @@ public class LoggerAsp {
 
     @After("execution(* com.example.controller..*.*(..))")
     public void logAfter(JoinPoint joinPoint) {
-        logger.info("Выполнился метод" + joinPoint.getSignature().getName());
+        logger.info("Method executed  " + joinPoint.getSignature().getName());
     }
 
 }
