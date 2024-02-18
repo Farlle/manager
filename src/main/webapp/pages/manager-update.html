@@ -12,7 +12,10 @@
     <input type="text" id="name" th:field="*{name}">
     <label for="name">Department:</label>
     <input type="text" id="department" th:field="*{department}">
-
+    <label for="employees">Employees:</label>
+    <div th:each="employee : ${availableEmployees}">
+        <input type="checkbox" th:value="${employee.id}" th:text="${employee.name}" name="employeeIds">
+    </div>
     <br>
     <input type="submit" value="Update Manager">
 </form>

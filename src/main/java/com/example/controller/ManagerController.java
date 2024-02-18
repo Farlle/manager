@@ -58,7 +58,10 @@ public class ManagerController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateManager(@ModelAttribute("manager") Manager manager, @PathVariable("id") int id) {
+    public String updateManager(@ModelAttribute("manager") Manager manager, @PathVariable("id") int id,
+                                @RequestParam("employeeIds") List<Integer> employeeIds) {
+        List<Employee> employees = employeeRepository.getAllEmployeeIds(employeeIds);
+        manager.setEmployees(employees);
         managerRepository.updateManager(id, manager);
         return "redirect:/manager/list";
     }

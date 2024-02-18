@@ -55,7 +55,7 @@ public class ManagerRepositoryImp implements ManagerRepository {
             Manager existingManager = optionalManager.get();
             existingManager.setName(updManager.getName());
             existingManager.setDepartment(updManager.getDepartment());
-            existingManager.setEmployees(updManager.getEmployees());
+            existingManager.setEmployees((List<Employee>) updManager.getEmployees());
         } else {
             throw new IllegalArgumentException("Employee with id " + id + " not found");
         }
