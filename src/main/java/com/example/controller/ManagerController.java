@@ -42,7 +42,6 @@ public class ManagerController {
     @PostMapping("/add")
     public String addManager(@ModelAttribute Manager manager, @RequestParam("employeeIds") List<Integer> employeeIds) {
         List<Employee> employees = employeeRepository.getAllEmployeeIds(employeeIds);
-        System.out.println(employees);
         manager.setEmployees(employees);
         managerRepository.createManager(manager);
         return "redirect:/manager/list";
@@ -77,24 +76,6 @@ public class ManagerController {
         model.addAttribute("manager", manager);
         model.addAttribute("employees", employees);
         return "manager-employee-list";
-    }
-
-    @GetMapping("/addEmployee")
-    public String addEmployee(@RequestParam("managerId") int managerId, @RequestParam("employeeId") int employeeId) {
-        Manager manager = managerRepository.getManagerById(managerId);
-        Employee employee = employeeRepository.getEmployeeById(employeeId);
-        manager.getEmployees().add(employee);
-        managerRepository.updateManager(managerId, manager);
-        return "redirect:/manager/update/" + managerId;
-    }
-
-    @GetMapping("/removeEmployee")
-    public String removeEmployee(@RequestParam("managerId") int managerId, @RequestParam("employeeId") int employeeId) {
-        Manager manager = managerRepository.getManagerById(managerId);
-        Employee employee = employeeRepository.getEmployeeById(employeeId);
-        manager.getEmployees().remove(employee);
-        managerRepository.updateManager(managerId, manager);
-        return "redirect:/manager/update/" + managerId;
     }
 
 }

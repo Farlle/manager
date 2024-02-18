@@ -49,24 +49,6 @@ public class ApplicationConfig implements WebMvcConfigurer, ApplicationContextAw
         return engine;
     }
 
-    @Override
-    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-        resolvers.add(exceptionResolver());
-    }
-
-    @Bean
-    public SimpleMappingExceptionResolver exceptionResolver() {
-        SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
-
-        // Настройка сопоставлений исключений с URL-адресами
-        Properties exceptionMappings = new Properties();
-        exceptionMappings.put("org.springframework.web.servlet.NoHandlerFoundException", "error");
-
-        exceptionResolver.setExceptionMappings(exceptionMappings);
-        exceptionResolver.setDefaultErrorView("error-page"); // Обработка ошибки по умолчанию
-
-        return exceptionResolver;
-    }
 
     private SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();

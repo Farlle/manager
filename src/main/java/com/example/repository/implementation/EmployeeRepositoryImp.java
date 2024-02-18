@@ -60,8 +60,8 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
 
     @Override
     public void deleteEmployee(int id) {
-        boolean remowed = employees.removeIf(employee -> employee.getId() == id);
-        if (!remowed) {
+        boolean removed = employees.removeIf(employee -> employee.getId() == id);
+        if (!removed) {
             throw new IllegalArgumentException("Employee with id " + id + " not found");
         }
 
