@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.repository.EmployeeRepository;
 
+import java.util.Arrays;
+
 @Controller
 @RequestMapping("/employee")
- public class EmployeeController {
+public class EmployeeController {
 
     private final EmployeeRepository employeeRepository;
 
@@ -25,31 +27,33 @@ import com.example.repository.EmployeeRepository;
     }
 
     @GetMapping("/add")
-    public String addEmployeePage(Model model){
+    public String addEmployeePage(Model model) {
         model.addAttribute("employee", new Employee());
+        model.addAttribute("positionAtWorkValues", Arrays.asList("CLEANER", "SUBMANAGER", "PROGRAMMER"));
         return "employee-page";
     }
 
     @PostMapping("/add")
-    public String addEmployee(@ModelAttribute("employee") Employee employee){
+    public String addEmployee(@ModelAttribute("employee") Employee employee) {
         employeeRepository.createEmployee(employee);
         return "redirect:/employee/list";
     }
 
     @GetMapping("/update/{id}")
-    public String updateEmployeePage(@PathVariable("id") int id, Model model){
+    public String updateEmployeePage(@PathVariable("id") int id, Model model) {
         model.addAttribute("employee", employeeRepository.getEmployeeById(id));
-        return "employee-page";
+        model.addAttribute("positionAtWorkValues", Arrays.asList("CLEANER", "SUBMANAGER", "PROGRAMMER"));
+        return "employee-update";
     }
 
     @PostMapping("/update/{id}")
-    public String updateEmployee(@ModelAttribute("employee") Employee employee, @PathVariable("id") int id){
-        employeeRepository.updateEmployee(employee);
+    public String updateEmployee(@ModelAttribute("employee") Employee employee, @PathVariable("id") int id) {
+        employeeRepository.updateEmployee(id, employee);
         return "redirect:/employee/list";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteEmployee(@PathVariable("id") int id){
+    public String deleteEmployee(@PathVariable("id") int id) {
         employeeRepository.deleteEmployee(id);
         return "redirect:/employee/list";
     }
