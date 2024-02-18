@@ -27,7 +27,7 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
         return (Employee) employees.stream()
                 .filter(employee -> employee.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("Employee with id " + id + " not found"));
     }
 
     @Override
@@ -60,7 +60,11 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
 
     @Override
     public void deleteEmployee(int id) {
-        employees.removeIf(employee -> employee.getId() == id);
+        boolean remowed = employees.removeIf(employee -> employee.getId() == id);
+        if (!remowed) {
+            throw new IllegalArgumentException("Employee with id " + id + " not found");
+        }
+
     }
 
     @Override

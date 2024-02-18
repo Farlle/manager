@@ -6,13 +6,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+
+import java.util.List;
+import java.util.Properties;
 
 
 @EnableWebMvc
@@ -44,6 +49,25 @@ public class ApplicationConfig implements WebMvcConfigurer, ApplicationContextAw
         return engine;
     }
 
+    @Override
+    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        resolvers.add(exceptionResolver());
+    }
+
+    @Bean
+    public SimpleMappingExceptionResolver exceptionResolver() {
+        SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
+
+        // Настройка сопоставлений исключений с URL-адресами
+        Properties exceptionMappings = new Properties();
+        exceptionMappings.put("org.springframework.web.servlet.NoHandlerFoundException", "error");
+
+        exceptionResolver.setExceptionMappings(exceptionMappings);
+        exceptionResolver.setDefaultErrorView("error-page"); // Обработка ошибки по умолчанию
+
+        return exceptionResolver;
+    }
+
     private SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
         resolver.setApplicationContext(applicationContext);
@@ -53,6 +77,6 @@ public class ApplicationConfig implements WebMvcConfigurer, ApplicationContextAw
         return resolver;
     }
 
-
-
 }
+
+
