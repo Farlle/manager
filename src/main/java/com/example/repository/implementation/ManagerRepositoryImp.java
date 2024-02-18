@@ -26,7 +26,7 @@ public class ManagerRepositoryImp implements ManagerRepository {
         return managers.stream()
                 .filter(manager -> manager.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("Manager with id " + id + " not found"));
     }
 
     @Override
@@ -63,13 +63,10 @@ public class ManagerRepositoryImp implements ManagerRepository {
 
     @Override
     public void deleteManager(int id) {
-        managers.removeIf(manager -> manager.getId() == id);
+        boolean removed = managers.removeIf(manager -> manager.getId() == id);
+        if (!removed) {
+            throw new IllegalArgumentException("Manager with id " + id + " not found");
+        }
     }
 
-    @Override
-    public void save(Manager manager) {
-//        var saveManager =  managers.stream()
-//                .filter(man->man.getId()==manager.getId())
-//                .forEach();
-    }
 }
