@@ -12,4 +12,6 @@ public interface ManagerRepository {
     void createManager(Manager manager);
     void updateManager(int id, Manager manager);
     void deleteManager(int id);
+
+    void save(Manager manager);
 }

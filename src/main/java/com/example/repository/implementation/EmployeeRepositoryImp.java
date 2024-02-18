@@ -8,6 +8,7 @@ import com.example.repository.EmployeeRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class EmployeeRepositoryImp implements EmployeeRepository {
@@ -16,15 +17,15 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
     private int id = 0;
 
     {
-        employees.add(new Employee(id++,"Oleg", PositionAtWork.CLEANER, 20_000));
-        employees.add(new Employee(id++,"Sashok", PositionAtWork.PROGRAMMER, 200_000));
-        employees.add(new Employee(id++,"Dimas", PositionAtWork.SUBMANAGER, 500_000));
+        employees.add(new Employee(id++, "Oleg", PositionAtWork.CLEANER, 20_000));
+        employees.add(new Employee(id++, "Sashok", PositionAtWork.PROGRAMMER, 200_000));
+        employees.add(new Employee(id++, "Dimas", PositionAtWork.SUBMANAGER, 500_000));
     }
 
     @Override
     public Employee getEmployeeById(int id) {
         return (Employee) employees.stream()
-                .filter(employee -> employee.getId()==id)
+                .filter(employee -> employee.getId() == id)
                 .findFirst()
                 .orElse(null);
     }
@@ -36,26 +37,36 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
 
     @Override
     public void createEmployee(Employee employee) {
-       // employee.setId(id++);
+        employee.setId(id++);
         employees.add(employee);
+
     }
 
     @Override
-    public void updateEmployee(Employee updatedEmployee) {
-        Optional<Employee> optEmployee = employees.stream()
-                .filter(employee -> employee.getId()==updatedEmployee.getId())
+    public void updateEmployee(int id, Employee updatedEmployee) {
+        Optional<Employee> optionalEmployee = employees.stream()
+                .filter(employee -> employee.getId() == id)
                 .findFirst();
 
-        if(optEmployee.isPresent()){
-            Employee employee = optEmployee.get();
-            employee.setName(updatedEmployee.getName());
-            employee.setPositionAtWork(updatedEmployee.getPositionAtWork());
-            employee.setSalary(updatedEmployee.getSalary());
+        if (optionalEmployee.isPresent()) {
+            Employee existingEmployee = optionalEmployee.get();
+            existingEmployee.setName(updatedEmployee.getName());
+            existingEmployee.setSalary(updatedEmployee.getSalary());
+            existingEmployee.setPositionAtWork(updatedEmployee.getPositionAtWork());
+        } else {
+            throw new IllegalArgumentException("Employee with id " + id + " not found");
         }
     }
 
     @Override
     public void deleteEmployee(int id) {
-        employees.removeIf(employee -> employee.getId()==id);
+        employees.removeIf(employee -> employee.getId() == id);
+    }
+
+    @Override
+    public List<Employee> getAllEmployeeIds(List<Integer> ids) {
+        return employees.stream()
+                .filter(employee -> ids.contains(employee.getId()))
+                .collect(Collectors.toList());
     }
 }

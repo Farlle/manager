@@ -41,6 +41,7 @@ public class ManagerRepositoryImp implements ManagerRepository {
 
     @Override
     public void createManager(Manager manager) {
+        manager.setId(id++);
         managers.add(manager);
     }
 
@@ -55,11 +56,20 @@ public class ManagerRepositoryImp implements ManagerRepository {
             existingManager.setName(updManager.getName());
             existingManager.setDepartment(updManager.getDepartment());
             existingManager.setEmployees(updManager.getEmployees());
+        } else {
+            throw new IllegalArgumentException("Employee with id " + id + " not found");
         }
     }
 
     @Override
     public void deleteManager(int id) {
         managers.removeIf(manager -> manager.getId() == id);
+    }
+
+    @Override
+    public void save(Manager manager) {
+//        var saveManager =  managers.stream()
+//                .filter(man->man.getId()==manager.getId())
+//                .forEach();
     }
 }
