@@ -15,7 +15,6 @@
     <label for="name">Department:</label>
     <input type="text" id="department" th:field="*{department}">
     <br>
-    <label for="employees">Employees:</label>
     <div th:each="employee : ${availableEmployees}">
         <input type="checkbox" th:value="${employee.id}" th:text="${employee.name}" name="employeeIds">
     </div>

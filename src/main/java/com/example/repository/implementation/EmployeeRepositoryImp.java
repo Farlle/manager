@@ -24,7 +24,7 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
 
     @Override
     public Employee getEmployeeById(int id) {
-        return (Employee) employees.stream()
+        return employees.stream()
                 .filter(employee -> employee.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Employee with id " + id + " not found"));
